@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { Post } from '../post.model';
+import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { PostsService } from "../posts.sevice";
 
@@ -10,12 +9,6 @@ import { PostsService } from "../posts.sevice";
 })
 export class PostCreateComponent {
 
-    // public enteredValue = '';
-    // public enteredContent = '';
-    // public enteredTitle = '';
-    // public newPost = 'NO CONTENT';
-    // @Output() public postCreated = new EventEmitter<Post>();
-
     constructor(
         private _postsService: PostsService
     ) {}
@@ -24,16 +17,8 @@ export class PostCreateComponent {
         if (form.invalid) {
             return;
         }
-        // postInput: HTMLTextAreaElement
-        // console.dir(postInput);
-        // this.newPost = postInput.value;
-        // this.newPost = this.enteredContent;
-        // const post: Post = {
-        //     title: form.value.title,
-        //     content: form.value.content
-        // };
-        // this.postCreated.emit(post);
         this._postsService.addPost(form.value.title, form.value.content);
+        form.resetForm();
     }
 }
 
