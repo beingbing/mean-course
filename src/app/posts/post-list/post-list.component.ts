@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Post } from '../post.model';
+import { PostsService } from "../posts.sevice";
 
 @Component({
     selector: 'app-post-list',
@@ -13,4 +14,8 @@ export class PostListComponent {
         // {title: 'Third Post', content: 'There is no stopping to me now'},
         // {title: 'Forth Post', content: 'Okay, I will hold on for you'}
     ];
+
+    constructor(
+        private _postsService: PostsService
+    ) {}
 }
