@@ -69,4 +69,15 @@ app.put('/api/posts/:id', (req, res, next) => {
     })
 });
 
+app.get('/api/posts/:id', (req, res, next) => {
+    console.log('I ran');
+    Post.findById(req.params.id).then(post => {
+        if (post) {
+            res.status(200).json(post);
+        } else {
+            res.status(404).json({ message: 'Post not found!'});
+        }
+    })
+})
+
 module.exports = app;
