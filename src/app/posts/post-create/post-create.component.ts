@@ -13,6 +13,7 @@ import { Post } from './../post.model';
 export class PostCreateComponent implements OnInit {
 
     public post: Post;
+    public isLoading: boolean;
     private mode = 'create';
     private postId: string;
     constructor(
@@ -24,6 +25,7 @@ export class PostCreateComponent implements OnInit {
         if (form.invalid) {
             return;
         }
+        this.isLoading = true;
         if (this.mode === 'create') {
             this._postsService.addPost(form.value.title, form.value.content);
         } else {
@@ -37,7 +39,9 @@ export class PostCreateComponent implements OnInit {
             if (paramMap.has('id')) {
                 this.mode = 'edit';
                 this.postId = paramMap.get('id');
+                this.isLoading = true;
                 this._postsService.getPost(this.postId).subscribe(postData => {
+                    this.isLoading = false;
                     this.post = {
                         id: postData._id,
                         title: postData.title,
